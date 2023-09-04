@@ -64,9 +64,9 @@ app.post("/login", async (req, res) => {
 
 
 app.get("/blogs", async (req, res) => {
-    const category = req.category ;
+    const Author = req.Author ;
     try {
-        const blogs = await BlogModel.find({category:category})
+        const blogs = await BlogModel.find({Author:Author})
         res.send({ blogs })
     }
     catch (err) {
