@@ -61,11 +61,11 @@ app.post("/login", async (req, res) => {
 
 
 
-app.use(authentication)
+
 
 app.get("/blogs", async (req, res) => {
     try {
-        const blogs = await BlogModel.find({ user_id: req.userID })
+        const blogs = await BlogModel.find()
         res.send({ blogs })
     }
     catch (err) {
@@ -74,6 +74,7 @@ app.get("/blogs", async (req, res) => {
     }
 })
 
+app.use(authentication)
 
 app.post("/blogs/add", async (req, res) => {
     const { Title, Category, Author,Content,Image } = req.body;
