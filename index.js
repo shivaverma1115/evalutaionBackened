@@ -60,11 +60,17 @@ app.post("/login", async (req, res) => {
 
 
 
-
-
-
 app.get("/blogs", async (req, res) => {
+    const {author,category} = req.query ;
     try {
+        if( author ){
+            const blogs = await BlogModel.find({Author:{$regex:author}})
+            res.send({ blogs })
+        }
+        if( category ){
+            const blogs = await BlogModel.find({Category:{$regex:category}})
+            res.send({ blogs })
+        }
         const blogs = await BlogModel.find()
         res.send({ blogs })
     }
@@ -75,7 +81,6 @@ app.get("/blogs", async (req, res) => {
 })
 
 app.use(authentication)
-
 app.post("/blogs/add", async (req, res) => {
     const { Title, Category, Author,Content,Image } = req.body;
     const userID = req.userID
