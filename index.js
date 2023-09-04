@@ -64,8 +64,9 @@ app.post("/login", async (req, res) => {
 
 
 app.get("/blogs", async (req, res) => {
+    const category = req.category ;
     try {
-        const blogs = await BlogModel.find()
+        const blogs = await BlogModel.find({category:category})
         res.send({ blogs })
     }
     catch (err) {
